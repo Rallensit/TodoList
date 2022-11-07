@@ -4,6 +4,8 @@
 
   const dispatch = createEventDispatcher();
 
+  // TODO: Al obtener los documentos no se recoge el id del documento correctamente, lo que hace que no deje actualizar ni borrar el documento.
+
   function remove() {
     dispatch("remove", { id });
   }
