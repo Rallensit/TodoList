@@ -4,24 +4,33 @@
 
   import { auth, googleProvider } from "./firebase";
   import { authState } from "rxfire/auth";
+  import { reload } from "firebase/auth";
 
-  let user = authState(auth);
+  let user;
 
-  //   const unsubscribe = authState(auth).subscribe((u) => (user = u));
+  const unsubscribe = authState(auth).subscribe((u) => (user = u));
 
   function login() {
     auth.signInWithPopup(googleProvider);
   }
+
+  function windowReload() {
+    location.reload();
+  }
 </script>
 
 <section>
-  {#if $user}
-    <Profile {...$user} />
-    <button on:click={() => auth.signOut()}>Logout</button>
+  {#if user}
+    <Profile {...user} />
+    <button
+      on:click={() => auth.signOut()}
+      on:click={() => windowReload()}
+      class="button">Logout</button
+    >
     <hr />
-    <Todos uid={$user.uid} />
+    <Todos uid={user.uid} />
   {:else}
-    <button on:click={login}> Signin with Google </button>
+    <button on:click={login} class="button"> Signin with Google </button>
   {/if}
 </section>
 

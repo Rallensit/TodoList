@@ -1,10 +1,9 @@
 <script>
   import { fade, fly } from "svelte/transition";
+
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
-
-  // TODO: Al obtener los documentos no se recoge el id del documento correctamente, lo que hace que no deje actualizar ni borrar el documento.
 
   function remove() {
     dispatch("remove", { id });
@@ -13,30 +12,53 @@
   function toggleStatus() {
     let newStatus = !complete;
     dispatch("toggle", {
-      id,
       newStatus,
+      created,
     });
   }
 
-  export let id; // document ID
+  // document ID
+  export let id;
   export let text;
   export let complete;
+  export let created;
 </script>
 
-<li in:fly={{ x: 900, duration: 500 }}>
-  <span class:complete>{text}</span>
+<li in:fly={{ x: 900, duration: 500 }} out:fade>
   {#if complete}
-    <button on:click={toggleStatus}> ✔️ </button>
+    <span class="is-complete">
+      {text}
+      +
+      {id}
+      <!-- {text + ' - ' + id} -->
+    </span>
+    <button class="is-button" on:click={toggleStatus}> ✔️ </button>
   {:else}
-    <button on:click={toggleStatus}> ❌ </button>
+    <span>
+      {text}
+      +
+      {id}
+      <!-- {text + ' - ' + id} -->
+    </span>
+    <button class="is-button" on:click={toggleStatus}> ❌ </button>
   {/if}
 
-  <button on:click={remove}> 🗑 </button>
+  <button class="is-button" on:click={remove}> 🗑️ </button>
 </li>
 
 <style>
-  .complete {
+  .is-complete {
     text-decoration: line-through;
     color: green;
+  }
+
+  li {
+    display: flex;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  span {
+    margin-right: auto;
   }
 </style>
