@@ -6,7 +6,7 @@
   const dispatch = createEventDispatcher();
 
   function remove() {
-    dispatch("remove", { id });
+    dispatch("remove", { created });
   }
 
   function toggleStatus() {

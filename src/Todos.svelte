@@ -32,18 +32,20 @@
   //   });
   // });
 
-  function getDocName(datetime) {
+  async function getDocName(datetime) {
     const nameQuery = db
       .collection("todos")
       .where("uid", "==", uid)
       .where("created", "==", datetime);
 
-    nameQuery.get().then((querySnapshot) => {
-      const DocName = querySnapshot.docs[0].id;
-      // TODO: el console log sava los datos que quiero pero en el return no los obtengo
-      console.log(DocName);
-      return _callback(querySnapshot.docs[0].id);
-    });
+    // nameQuery.get().then((querySnapshot) => {
+    //   const DocName = querySnapshot.docs[0].id;
+    //   // TODO: el console log sava los datos que quiero pero en el return no los obtengo
+    //   console.log(DocName);
+    //   return querySnapshot.docs[0].id;
+    // });
+    let querySnapshot = await nameQuery.get();
+    return querySnapshot.docs[0].id;
   }
 
   function add() {
@@ -56,15 +58,16 @@
     text = "";
   }
 
-  function updateStatus(event) {
+  async function updateStatus(event) {
     const { newStatus, created } = event.detail;
-    const id = getDocName(created);
-    console.log(id);
-    // db.collection("todos").doc(id).update({ complete: newStatus });
+    const id = await getDocName(created);
+    // console.log(id);
+    db.collection("todos").doc(id).update({ complete: newStatus });
   }
 
-  function removeItem(event) {
-    const { id } = event.detail;
+  async function removeItem(event) {
+    const { created } = event.detail;
+    const id = await getDocName(created);
     db.collection("todos").doc(id).delete();
   }
 </script>
