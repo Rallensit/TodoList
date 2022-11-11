@@ -28,17 +28,11 @@
   {#if complete}
     <span class="is-complete">
       {text}
-      +
-      {id}
-      <!-- {text + ' - ' + id} -->
     </span>
     <button class="is-button" on:click={toggleStatus}> ✔️ </button>
   {:else}
     <span>
       {text}
-      +
-      {id}
-      <!-- {text + ' - ' + id} -->
     </span>
     <button class="is-button" on:click={toggleStatus}> ❌ </button>
   {/if}
