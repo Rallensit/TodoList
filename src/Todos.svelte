@@ -6,31 +6,18 @@
 
   export let uid;
 
-  // mirarme este video https://www.youtube.com/watch?v=_TTlatg865k&ab_channel=WebJeda
-  // TODO: intentar pasarle con la constante todos los id(nombre del documento)
-
-  let text = "some task";
+  let text = "";
+  let matricula = "";
+  let km = "";
+  let modelo = "";
+  let color = "#000000";
 
   const query = db
     .collection("todos")
     .where("uid", "==", uid)
-    .orderBy("created");
+    .orderBy("created", "desc");
 
   const todos = collectionData(query, "id").pipe(startWith([]));
-
-  // db.collection("todos").onSnapshot((querySnapshot) => {
-  //   querySnapshot.forEach((doc) => {
-  //     console.log(doc.id); // For doc name
-  //   });
-  // });
-
-  // const id = [];
-  // query.get().then((querySnapshot) => {
-  //   querySnapshot.forEach((doc) => {
-  //     id.push(doc.id);
-  //     console.log(doc.data().created);
-  //   });
-  // });
 
   async function getDocName(datetime) {
     const nameQuery = db
@@ -38,12 +25,6 @@
       .where("uid", "==", uid)
       .where("created", "==", datetime);
 
-    // nameQuery.get().then((querySnapshot) => {
-    //   const DocName = querySnapshot.docs[0].id;
-    //   // TODO: el console log sava los datos que quiero pero en el return no los obtengo
-    //   console.log(DocName);
-    //   return querySnapshot.docs[0].id;
-    // });
     let querySnapshot = await nameQuery.get();
     return querySnapshot.docs[0].id;
   }
@@ -51,17 +32,23 @@
   function add() {
     db.collection("todos").add({
       uid,
+      matricula,
+      km,
+      modelo,
+      color,
       text,
       complete: false,
       created: Date.now(),
     });
     text = "";
+    matricula = "";
+    km = "";
+    modelo = "";
   }
 
   async function updateStatus(event) {
     const { newStatus, created } = event.detail;
     const id = await getDocName(created);
-    // console.log(id);
     db.collection("todos").doc(id).update({ complete: newStatus });
   }
 
@@ -73,16 +60,30 @@
 </script>
 
 <ul>
-  {#each $todos as todo, i}
+  {#each $todos as todo}
     <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
   {/each}
 </ul>
 
-<input bind:value={text} />
+<hr />
+<!-- añadir el formulario en una modal de svelte -->
+<div>
+  <h3>Añadir nueva tarea</h3>
+  <p>Matricula</p>
+  <input placeholder="0000AAA o AA0000AA" bind:value={matricula} />
+  <p>KM</p>
+  <input placeholder="p.ej 150000" bind:value={km} />
+  <p>Modelo</p>
+  <input placeholder="p.ej Seat Ibiza 1.9tdi" bind:value={modelo} />
+  <p>Descripcion tarea</p>
+  <input placeholder="Descripcion tarea" bind:value={text} />
+  <p>Color</p>
+  <input type="color" bind:value={color} />
+</div>
 
 <hr />
 
-<p>Your task: <strong>{text}</strong></p>
+<!-- <p>Your task: <strong>{text}</strong></p> -->
 
 <button class="button is-info" on:click={add}>Add Task</button>
 

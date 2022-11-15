@@ -4,8 +4,9 @@
     export let uid;
 </script>
 
+<div style="display: flex;">
+    <img src={ photoURL } width="100" alt="user avatar">
+    <h3>Bienvenido { displayName }!</h3>
+</div>
 
-<h3>Hi { displayName }!</h3>
-
-<img src={ photoURL } width="100" alt="user avatar">
-<p>Your userID is { uid }</p>
+<!-- <p>Your userID is { uid }</p> -->
