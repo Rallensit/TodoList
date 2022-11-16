@@ -3,8 +3,14 @@
   import { db } from "./firebase";
   import { collectionData } from "rxfire/firestore";
   import { startWith } from "rxjs/operators";
+  import Content from "./Content.svelte";
+  import Modal from "svelte-simple-modal";
 
   export let uid;
+
+  // Mirar este tutorial para las modales:
+  // https://svelte.dev/examples/modal
+  // https://svelte.dev/repl/b95ce66b0ef34064a34afc5c0249f313?version=3.53.1
 
   let text = "";
   let matricula = "";
@@ -58,6 +64,7 @@
     const id = await getDocName(created);
     db.collection("todos").doc(id).delete();
   }
+
 </script>
 
 <ul>
@@ -87,6 +94,8 @@
 <!-- <p>Your task: <strong>{text}</strong></p> -->
 
 <button class="button is-info" on:click={add}>Add Task</button>
+
+<Modal><Content modalType="add" uid={uid}/></Modal>
 
 <style>
   input {
