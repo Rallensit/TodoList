@@ -17,6 +17,10 @@
     });
   }
 
+  function edit() {
+    // open edit modal
+  }
+
   // document ID
   export let id;
   export let text;
@@ -75,6 +79,8 @@
     class="color-div"
     style="background-color: {color}; border:1px solid {color};"
   />
+  
+  <button class="is-button" on:click={edit}> ✏️ </button>
   <button class="is-button" on:click={remove}> 🗑️ </button>
 </li>
 

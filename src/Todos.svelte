@@ -30,6 +30,7 @@
   }
 
   function add() {
+    // Open Create Task Modal
     db.collection("todos").add({
       uid,
       matricula,
