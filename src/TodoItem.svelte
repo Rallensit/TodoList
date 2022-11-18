@@ -55,35 +55,61 @@
 
     return format;
   }
+
+  function textFormat(txt) {
+    if (txt.length > 10) {
+      txt = txt.substring(0, 10) + "...";
+    }
+    return txt;
+  }
 </script>
 
-<li in:fly={{ x: 900, duration: 500 }} out:fade>
-  {#if complete}
-    <span class="is-complete">
+<!-- <li in:fly={{ x: 900, duration: 500 }} out:fade> -->
+<tr in:fly={{ x: 900, duration: 500 }} out:fade>
+  <td>
+    {textFormat(modelo)}
+  </td>
+  <td>
+    {matricula}
+  </td>
+  <td>
+    {km}
+  </td>
+  <td>
+    {textFormat(text)}
+  </td>
+  <td>
+    {dateFormat(created, "dd-mm-yyyy")}
+  </td>
+  <td style="display: inline-flex;">
+    {#if complete}
+      <button class="is-button" on:click={toggleStatus}> ✔️ </button>
+      <!-- <span class="is-complete">
       {modelo}
       {matricula}
       {km}
       {text} - {dateFormat(created, "dd-mm-yyyy")}
-    </span>
-    <button class="is-button" on:click={toggleStatus}> ✔️ </button>
-  {:else}
-    <span>
-      {modelo}
-      {matricula}
-      {km}
-      {text} - {dateFormat(created, "dd-mm-yyyy")}
-    </span>
-    <button class="is-button" on:click={toggleStatus}> ❌ </button>
-  {/if}
-  <div
-    class="color-div"
-    style="background-color: {color}; border:1px solid {color};"
-  />
-  
-  <button class="is-button" on:click={edit}> ✏️ </button>
-  <button class="is-button" on:click={remove}> 🗑️ </button>
-</li>
+    </span> -->
+    {:else}
+      <button class="is-button" on:click={toggleStatus}> ❌ </button>
+      <!-- <span>
+        {modelo}
+        {matricula}
+        {km}
+        {text} - {dateFormat(created, "dd-mm-yyyy")}
+      </span> -->
+    {/if}
+    <div
+      class="color-div"
+      style="background-color: {color}; border:1px solid {color};"
+    />
 
+    <button class="is-button" on:click={edit}> ✏️ </button>
+    <button class="is-button" on:click={remove}> 🗑️ </button>
+  </td>
+</tr>
+
+<!-- </li> -->
 <style>
   .is-complete {
     text-decoration: line-through;
@@ -100,6 +126,8 @@
     display: block;
     content: "";
     padding: 20px;
+    max-width: 20px;
+    max-height: 20px;
     /* background-image:url('../images/gold-line-2v.gif');  */
     /* background-repeat:repeat-y; */
     height: 100%;

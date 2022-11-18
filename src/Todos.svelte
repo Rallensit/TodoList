@@ -64,18 +64,27 @@
     const id = await getDocName(created);
     db.collection("todos").doc(id).delete();
   }
-
 </script>
 
 <ul>
-  {#each $todos as todo}
-    <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
-  {/each}
+  <table>
+    <tr>
+      <th>Modelo</th>
+      <th>Matricula</th>
+      <th>Km</th>
+      <th>Descripcion</th>
+      <th>Fecha</th>
+      <th></th>
+    </tr>
+    {#each $todos as todo}
+      <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
+    {/each}
+  </table>
 </ul>
 
 <hr />
 <!-- añadir el formulario en una modal de svelte -->
-<div>
+<!-- <div>
   <h3>Añadir nueva tarea</h3>
   <p>Matricula</p>
   <input placeholder="0000AAA o AA0000AA" bind:value={matricula} />
@@ -89,13 +98,13 @@
   <input type="color" bind:value={color} />
 </div>
 
-<hr />
+<hr /> -->
 
 <!-- <p>Your task: <strong>{text}</strong></p> -->
 
-<button class="button is-info" on:click={add}>Add Task</button>
+<!-- <button class="button is-info" on:click={add}>Add Task</button> -->
 
-<Modal><Content modalType="add" uid={uid}/></Modal>
+<Modal><Content modalType="add" {uid} /></Modal>
 
 <style>
   input {
