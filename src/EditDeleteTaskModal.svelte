@@ -1,6 +1,5 @@
 <script>
   import { db } from "./firebase";
-  // Añadir funciones de editar tareas
 
   export let uid;
   export let text;
@@ -9,10 +8,9 @@
   export let modelo;
   export let color;
 
-  // Funciones de editar y eliminar
+  // Edit and delete functions
 </script>
 
-<!-- <p>🎉 {message} 🍾</p> -->
 <div>
   <h3>Añadir nueva tarea</h3>
   <div class="formDiv">

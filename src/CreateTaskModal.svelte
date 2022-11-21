@@ -26,7 +26,7 @@
       created: Date.now(),
     });
 
-    // Cerrar Modal
+    // Close Modal
     close();
   }
 </script>

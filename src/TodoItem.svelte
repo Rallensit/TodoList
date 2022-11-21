@@ -28,25 +28,25 @@
   export let color;
 
   function dateFormat(dateTime, format) {
-    // Parsear el input
+    // Parse the input
     const date = new Date(dateTime);
 
-    // Extraer las partes de la fecha
+    // Extract the parts of the date
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    // Reemplazar el mes
+    // Replace month
     format = format.replace("mm", month.toString().padStart(2, "0"));
 
-    // Reemplazar el año
+    // Replace the year
     if (format.indexOf("yyyy") > -1) {
       format = format.replace("yyyy", year.toString());
     } else if (format.indexOf("yy") > -1) {
       format = format.replace("yy", year.toString().substr(2, 2));
     }
 
-    // Reemplazar el día
+    // Replace the day
     format = format.replace("dd", day.toString().padStart(2, "0"));
 
     return format;

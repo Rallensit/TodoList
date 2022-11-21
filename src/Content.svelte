@@ -11,7 +11,7 @@
     if (modalType === "add") {
       open(CreateTaskModal, { close, uid: uid });
     } else if (modalType === "edit-delete") {
-      // Pasarle los datos de la tarea que selecciones
+      // Pass the selected task data
       open(EditDeleteTaskModal, { close, uid: uid });
     }
   };
