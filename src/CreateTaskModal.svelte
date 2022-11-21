@@ -1,8 +1,8 @@
 <script>
   import { Modal } from "svelte-simple-modal";
   import { db } from "./firebase";
-  // Añadir funciones de crear tareas
-  // export let message = "Hi";
+
+  export let close;
 
   export let uid;
   export let text = "";
@@ -11,7 +11,7 @@
   export let modelo = "";
   export let color = "#000000";
 
-  console.log(uid);
+  // console.log(uid);
 
   function add() {
     // Open Create Task Modal
@@ -27,22 +27,44 @@
     });
 
     // Cerrar Modal
-    Modal.close();
+    close();
   }
 </script>
 
 <div>
   <h3>Añadir nueva tarea</h3>
-  <p>Matricula</p>
-  <input placeholder="0000AAA o AA0000AA" bind:value={matricula} />
-  <p>KM</p>
-  <input placeholder="p.ej 150000" bind:value={km} />
-  <p>Modelo</p>
-  <input placeholder="p.ej Seat Ibiza 1.9tdi" bind:value={modelo} />
-  <p>Descripcion tarea</p>
-  <input placeholder="Descripcion tarea" bind:value={text} />
-  <p>Color</p>
-  <input type="color" bind:value={color} />
+  <div class="formDiv">
+    <h4 class="formText">Matricula</h4>
+    <input
+      class="formInput"
+      placeholder="0000AAA o AA0000AA"
+      bind:value={matricula}
+    />
+  </div>
+  <div class="formDiv">
+    <h4 class="formText">KM</h4>
+    <input class="formInput" placeholder="p.ej 150000" bind:value={km} />
+  </div>
+  <div class="formDiv">
+    <h4 class="formText">Modelo</h4>
+    <input
+      class="formInput"
+      placeholder="p.ej Seat Ibiza 1.9tdi"
+      bind:value={modelo}
+    />
+  </div>
+  <div class="formDiv">
+    <h4 class="formText">Tarea</h4>
+    <input
+      class="formInput"
+      placeholder="Descripcion tarea"
+      bind:value={text}
+    />
+  </div>
+  <div class="formDiv">
+    <h4 class="formText">Color</h4>
+    <input class="formInput" type="color" bind:value={color} />
+  </div>
 </div>
 
 <hr />
@@ -50,7 +72,17 @@
 <button class="button is-info" on:click={add}>Add Task</button>
 
 <style>
-  input {
+  :global(.formInput) {
     display: block;
+    width: 85%;
+  }
+
+  :global(.formText) {
+    display: block;
+    width: 15%;
+  }
+
+  :global(.formDiv) {
+    display: flex;
   }
 </style>

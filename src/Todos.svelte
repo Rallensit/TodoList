@@ -74,7 +74,7 @@
       <th>Km</th>
       <th>Descripcion</th>
       <th>Fecha</th>
-      <th></th>
+      <th />
     </tr>
     {#each $todos as todo}
       <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
@@ -83,31 +83,6 @@
 </ul>
 
 <hr />
-<!-- añadir el formulario en una modal de svelte -->
-<!-- <div>
-  <h3>Añadir nueva tarea</h3>
-  <p>Matricula</p>
-  <input placeholder="0000AAA o AA0000AA" bind:value={matricula} />
-  <p>KM</p>
-  <input placeholder="p.ej 150000" bind:value={km} />
-  <p>Modelo</p>
-  <input placeholder="p.ej Seat Ibiza 1.9tdi" bind:value={modelo} />
-  <p>Descripcion tarea</p>
-  <input placeholder="Descripcion tarea" bind:value={text} />
-  <p>Color</p>
-  <input type="color" bind:value={color} />
-</div>
-
-<hr /> -->
-
-<!-- <p>Your task: <strong>{text}</strong></p> -->
-
-<!-- <button class="button is-info" on:click={add}>Add Task</button> -->
 
 <Modal><Content modalType="add" {uid} /></Modal>
 
-<style>
-  input {
-    display: block;
-  }
-</style>
