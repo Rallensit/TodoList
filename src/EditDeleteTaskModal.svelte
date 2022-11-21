@@ -1,6 +1,7 @@
 <script>
   import { db } from "./firebase";
 
+  export let created;
   export let uid;
   export let text;
   export let matricula;
@@ -8,7 +9,46 @@
   export let modelo;
   export let color;
 
+  // console.log(created);
+  // console.log(uid);
+
+  // Load data from selected item
+  async function getDocData(datetime) {
+    const nameQuery = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .where("created", "==", datetime);
+
+    let querySnapshot = await nameQuery.get();
+    return querySnapshot.docs[0].data();
+  }
+
+  // da como resultado un promise, hay que hacerlo async como en Todos.svelte
+  console.log(getDocData(created));
+
+  // get the id of the selected document
+  async function getDocName(datetime) {
+    const nameQuery = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .where("created", "==", datetime);
+
+    let querySnapshot = await nameQuery.get();
+    return querySnapshot.docs[0].id;
+  }
+
   // Edit and delete functions
+  async function updateItem(event) {
+    const { newStatus, created } = event.detail;
+    const id = await getDocName(created);
+    db.collection("todos").doc(id).update({ complete: newStatus });
+  }
+
+  async function removeItem(event) {
+    const { created } = event.detail;
+    const id = await getDocName(created);
+    db.collection("todos").doc(id).delete();
+  }
 </script>
 
 <div>

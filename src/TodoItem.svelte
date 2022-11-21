@@ -18,7 +18,7 @@
     });
   }
 
-  export let id;
+  export let uid;
   export let text;
   export let complete;
   export let created;
@@ -88,7 +88,7 @@
     {/if}
     <!-- <button class="is-button" on:click={edit}> ✏️ </button> -->
     <button class="is-button" on:click={remove}> 🗑️ </button>
-    <Modal><Content modalType="edit-delete" /></Modal>
+    <Modal><Content modalType="edit-delete" {created} {uid} /></Modal>
   </td>
 </tr>
 

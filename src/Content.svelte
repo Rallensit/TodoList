@@ -2,6 +2,7 @@
   import { db } from "./firebase.js";
   export let modalType;
   export let uid;
+  export let created;
   import { getContext } from "svelte";
   import CreateTaskModal from "./CreateTaskModal.svelte";
   import EditDeleteTaskModal from "./EditDeleteTaskModal.svelte";
@@ -12,7 +13,7 @@
       open(CreateTaskModal, { close, uid: uid });
     } else if (modalType === "edit-delete") {
       // Pass the selected task data
-      open(EditDeleteTaskModal, { close, uid: uid });
+      open(EditDeleteTaskModal, { close, uid: uid, created: created });
     }
   };
 </script>
