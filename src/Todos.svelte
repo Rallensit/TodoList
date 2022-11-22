@@ -8,15 +8,12 @@
 
   export let uid;
 
-  // Mirar este tutorial para las modales:
-  // https://svelte.dev/examples/modal
-  // https://svelte.dev/repl/b95ce66b0ef34064a34afc5c0249f313?version=3.53.1
-
   let text = "";
   let matricula = "";
   let km = "";
   let modelo = "";
   let color = "#000000";
+  
 
   const query = db
     .collection("todos")
@@ -85,4 +82,3 @@
 <hr />
 
 <Modal><Content modalType="add" {uid} /></Modal>
-

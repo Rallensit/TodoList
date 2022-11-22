@@ -10,6 +10,7 @@
   export let km = "";
   export let modelo = "";
   export let color = "#000000";
+  export let updated = "";
 
   // console.log(uid);
 
@@ -24,6 +25,7 @@
       text,
       complete: false,
       created: Date.now(),
+      updated
     });
 
     // Close Modal
@@ -84,5 +86,9 @@
 
   :global(.formDiv) {
     display: flex;
+  }
+
+  :global(.formDiv:last-of-type){
+    float: right;
   }
 </style>
