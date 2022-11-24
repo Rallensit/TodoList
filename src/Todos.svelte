@@ -17,7 +17,7 @@
     query = db
       .collection("todos")
       .where("uid", "==", uid)
-      .where("matricula", "==", search)
+      .where("plate", "==", search)
       .orderBy("created", "desc");
   } else {
     query = db
@@ -47,18 +47,18 @@
   //   // Open Create Task Modal
   //   db.collection("todos").add({
   //     uid,
-  //     matricula,
+  //     plate,
   //     km,
-  //     modelo,
+  //     model,
   //     color,
-  //     text,
+  //     description,
   //     complete: false,
   //     created: Date.now(),
   //   });
-  //   text = "";
-  //   matricula = "";
+  //   description = "";
+  //   plate = "";
   //   km = "";
-  //   modelo = "";
+  //   model = "";
   // }
 
   async function updateStatus(event) {
