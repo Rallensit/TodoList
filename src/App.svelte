@@ -11,16 +11,22 @@
 </svelte:head>
 
 <main class="content">
-  <h1>{name}</h1>
-
+  <div>
+    <img src="images/favicon_1_15.png" alt="MainImage" />
+    <h1>{name}</h1>
+  </div>
   <Login />
 </main>
 
 <style>
-  h1 {
-    color: purple;
-  }
   main {
     margin: 20px;
+    /* background-color: rgb(42, 52, 82); */
+  }
+  div{
+    display: flex;
+  }
+  h1{
+    /* color: #ccc !important; */
   }
 </style>

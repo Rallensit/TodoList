@@ -2,6 +2,21 @@
   import { Modal } from "svelte-simple-modal";
   import { db } from "./firebase";
 
+  import { fly, fade } from "svelte/transition";
+  let hasError = false;
+  let isSuccessVisible = false;
+  let submitted = false;
+
+  const errMessage = "All the fields are required";
+
+  function handleSubmit(e) {
+    isSuccessVisible = true;
+    setTimeout(function () {
+      isSuccessVisible = false;
+    }, 4000);
+    add();
+  }
+
   export let close;
 
   export let uid;
@@ -33,44 +48,65 @@
   }
 </script>
 
+<!-- para meter validacion https://svelte.dev/repl/5230b1d71f1b4b048cf05e3a7a49aefc?version=3.24.0 -->
+
+{#if hasError == true}
+  <p class="error-alert">{errMessage}</p>
+{:else if isSuccessVisible}
+  <p class="error-alert" transition:fade={{ duration: 150 }}>
+    Data updated successfully
+  </p>
+{/if}
+
 <div>
   <h3>Add new task</h3>
-  <div class="formDiv">
-    <h4 class="formText">Plate</h4>
-    <input
-      class="formInput"
-      placeholder="0000AAA o AA0000AA"
-      bind:value={plate}
-    />
-  </div>
-  <div class="formDiv">
-    <h4 class="formText">KM</h4>
-    <input class="formInput" placeholder="p.ej 150000" bind:value={km} />
-  </div>
-  <div class="formDiv">
-    <h4 class="formText">Model</h4>
-    <input
-      class="formInput"
-      placeholder="p.ej Seat Ibiza 1.9tdi"
-      bind:value={model}
-    />
-  </div>
-  <div class="formDiv">
-    <h4 class="formText">Description</h4>
-    <input
-      class="formInput"
-      placeholder="Descripcion tarea"
-      bind:value={description}
-    />
-  </div>
-  <div class="formDiv">
-    <h4 class="formText">Color</h4>
-    <input class="formInput" type="color" bind:value={color} />
-  </div>
-  <hr />
-  <div class="formDiv">
-    <button on:click={add}> Add Task </button>
-  </div>
+  <form id="taskForm" class:submitted on:submit|preventDefault={handleSubmit}>
+    <div class="formDiv">
+      <h4 class="formText">Plate</h4>
+      <input
+        class="formInput"
+        placeholder="0000AAA o AA0000AA"
+        bind:value={plate}
+        required
+      />
+    </div>
+    <div class="formDiv">
+      <h4 class="formText">KM</h4>
+      <input
+        class="formInput"
+        placeholder="p.ej 150000"
+        bind:value={km}
+        required
+      />
+    </div>
+    <div class="formDiv">
+      <h4 class="formText">Model</h4>
+      <input
+        class="formInput"
+        placeholder="p.ej Seat Ibiza 1.9tdi"
+        bind:value={model}
+        required
+      />
+    </div>
+    <div class="formDiv">
+      <h4 class="formText">Description</h4>
+      <input
+        class="formInput"
+        placeholder="Descripcion tarea"
+        bind:value={description}
+        required
+      />
+    </div>
+    <div class="formDiv">
+      <h4 class="formText">Color</h4>
+      <input class="formInput" type="color" bind:value={color} />
+    </div>
+    <hr />
+    <div class="formDiv">
+      <button on:click={() => (submitted = true)}> Add Task </button>
+      <!-- on:click={add} -->
+    </div>
+  </form>
 </div>
 
 <style>

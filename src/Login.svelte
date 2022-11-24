@@ -37,6 +37,8 @@
 <style>
   section {
     background: rgb(235, 235, 235);
+    /* background-color: rgb(125, 158, 255); */
+    /* color: white; */
     padding: 20px;
   }
 </style>
