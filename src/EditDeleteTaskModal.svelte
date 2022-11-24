@@ -5,10 +5,10 @@
 
   export let created;
   export let uid;
-  export let text;
-  export let matricula;
+  export let description;
+  export let plate;
   export let km;
-  export let modelo;
+  export let model;
   export let color;
 
   // Load data from selected item
@@ -20,10 +20,10 @@
 
     let querySnapshot = await nameQuery.get();
     let data = querySnapshot.docs[0].data();
-    text = data.text;
-    matricula = data.matricula;
+    description = data.description;
+    plate = data.plate;
     km = data.km;
-    modelo = data.modelo;
+    model = data.model;
     color = data.color;
   }
 
@@ -44,9 +44,9 @@
     db.collection("todos").doc(id).update({
       color: color,
       km: km,
-      matricula: matricula,
-      modelo: modelo,
-      text: text,
+      plate: plate,
+      model: model,
+      description: description,
       updated: Date.now()
     });
     close();
@@ -62,13 +62,13 @@
 </script>
 
 <div>
-  <h3>Añadir nueva tarea</h3>
+  <h3>View the task</h3>
   <div class="formDiv">
-    <h4 class="formText">Matricula:</h4>
+    <h4 class="formText">Plate:</h4>
     <input
       class="formInput"
       placeholder="0000AAA o AA0000AA"
-      bind:value={matricula}
+      bind:value={plate}
     />
   </div>
   <div class="formDiv">
@@ -76,28 +76,29 @@
     <input class="formInput" placeholder="p.ej 150000" bind:value={km} />
   </div>
   <div class="formDiv">
-    <h4 class="formText">Modelo:</h4>
+    <h4 class="formText">Model:</h4>
     <input
       class="formInput"
       placeholder="p.ej Seat Ibiza 1.9tdi"
-      bind:value={modelo}
+      bind:value={model}
     />
   </div>
   <div class="formDiv">
-    <h4 class="formText">Tarea:</h4>
+    <h4 class="formText">Description:</h4>
     <input
       class="formInput"
       placeholder="Descripcion tarea"
-      bind:value={text}
+      bind:value={description}
     />
   </div>
   <div class="formDiv">
     <h4 class="formText">Color:</h4>
     <input class="formInput" type="color" bind:value={color} />
   </div>
+  <hr />
   <div class="formDiv">
-    <button on:click={updateItem}> Editar </button>
-    <button on:click={removeItem}> Eliminar </button>
+    <button on:click={updateItem}> Edit </button>
+    <button on:click={removeItem}> Delete </button>
   </div>
 </div>
 

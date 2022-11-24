@@ -5,10 +5,10 @@
   export let close;
 
   export let uid;
-  export let text = "";
-  export let matricula = "";
+  export let description = "";
+  export let plate = "";
   export let km = "";
-  export let modelo = "";
+  export let model = "";
   export let color = "#000000";
   export let updated = "";
 
@@ -18,14 +18,14 @@
     // Open Create Task Modal
     db.collection("todos").add({
       uid,
-      matricula,
+      plate,
       km,
-      modelo,
+      model,
       color,
-      text,
+      description,
       complete: false,
       created: Date.now(),
-      updated
+      updated,
     });
 
     // Close Modal
@@ -34,13 +34,13 @@
 </script>
 
 <div>
-  <h3>Añadir nueva tarea</h3>
+  <h3>Add new task</h3>
   <div class="formDiv">
-    <h4 class="formText">Matricula</h4>
+    <h4 class="formText">Plate</h4>
     <input
       class="formInput"
       placeholder="0000AAA o AA0000AA"
-      bind:value={matricula}
+      bind:value={plate}
     />
   </div>
   <div class="formDiv">
@@ -48,47 +48,47 @@
     <input class="formInput" placeholder="p.ej 150000" bind:value={km} />
   </div>
   <div class="formDiv">
-    <h4 class="formText">Modelo</h4>
+    <h4 class="formText">Model</h4>
     <input
       class="formInput"
       placeholder="p.ej Seat Ibiza 1.9tdi"
-      bind:value={modelo}
+      bind:value={model}
     />
   </div>
   <div class="formDiv">
-    <h4 class="formText">Tarea</h4>
+    <h4 class="formText">Description</h4>
     <input
       class="formInput"
       placeholder="Descripcion tarea"
-      bind:value={text}
+      bind:value={description}
     />
   </div>
   <div class="formDiv">
     <h4 class="formText">Color</h4>
     <input class="formInput" type="color" bind:value={color} />
   </div>
+  <hr />
+  <div class="formDiv">
+    <button on:click={add}> Add Task </button>
+  </div>
 </div>
-
-<hr />
-
-<button class="button is-info" on:click={add}>Add Task</button>
 
 <style>
   :global(.formInput) {
     display: block;
-    width: 85%;
+    width: 80%;
   }
 
   :global(.formText) {
     display: block;
-    width: 15%;
+    width: 20%;
   }
 
   :global(.formDiv) {
     display: flex;
   }
 
-  :global(.formDiv:last-of-type){
+  :global(.formDiv:last-of-type) {
     float: right;
   }
 </style>

@@ -19,12 +19,12 @@
   }
 
   export let uid;
-  export let text;
+  export let description;
   export let complete;
   export let created;
-  export let matricula;
+  export let plate;
   export let km;
-  export let modelo;
+  export let model;
   export let color;
 
   function dateFormat(dateTime, format) {
@@ -62,16 +62,16 @@
 
 <tr in:fly={{ x: 900, duration: 500 }} out:fade>
   <td>
-    {textFormat(modelo)}
+    {textFormat(model)}
   </td>
   <td>
-    {matricula}
+    {plate}
   </td>
   <td>
     {km}
   </td>
   <td>
-    {textFormat(text)}
+    {textFormat(description)}
   </td>
   <td>
     {dateFormat(created, "dd-mm-yyyy")}

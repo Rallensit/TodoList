@@ -9,28 +9,29 @@
 
   export let uid;
 
-  // let text = "";
-  // let matricula = "";
-  // let km = "";
-  // let modelo = "";
-  // let color = "#000000";
+  let search = "";
+  let query;
+  let todos;
 
-  let search;
-  let filteredQuery;
-
-  let query = db
-    .collection("todos")
-    .where("uid", "==", uid)
-    .orderBy("created", "desc");
-    // .where("matricula", "==", "%54%");
-
-  async function filter(search) {
-    // funcionalidad de filtrar por matricula
-    query = query.where("matricula", "==", "%54%");
-    console.log(search);
+  $: if (search) {
+    query = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .where("matricula", "==", search)
+      .orderBy("created", "desc");
+  } else {
+    query = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .orderBy("created", "desc");
   }
+  $: todos = collectionData(query, "id").pipe(startWith([]));
+  // let query = db
+  // .collection("todos")
+  // .where("uid", "==", uid)
+  // .orderBy("created", "desc");
 
-  const todos = collectionData(query, "id").pipe(startWith([]));
+  // let todos = collectionData(query, "id").pipe(startWith([]));
 
   async function getDocName(datetime) {
     const nameQuery = db
@@ -81,15 +82,14 @@ https://svelte.dev/repl/0429bd69748e44cdaeb8074c982f967d?version=3.41.0
 <ul>
   <div style="float: right;">
     <input type="search" bind:value={search} placeholder="Search" />
-    <button on:click={filter(search)}>Search</button>
   </div>
   <table>
     <tr>
-      <th>Modelo</th>
-      <th>Matricula</th>
+      <th>Model</th>
+      <th>Plate Number</th>
       <th>Km</th>
-      <th>Descripcion</th>
-      <th>Fecha</th>
+      <th>Description</th>
+      <th>Date</th>
       <th />
     </tr>
     {#each $todos as todo}
