@@ -10,3 +10,9 @@
 </div>
 
 <!-- <p>Your userID is { uid }</p> -->
+
+<style>
+    h3{
+        color: #ccc;
+    }
+</style>

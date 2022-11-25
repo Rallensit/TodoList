@@ -20,7 +20,7 @@
 
 <p>
   {#if modalType === "add"}
-    <button on:click={showModal}>Add new Task</button>
+    <button class="button" on:click={showModal}>Add new Task</button>
   {:else}
     <button class="is-button" on:click={showModal}> ⚙️ </button>
   {/if}

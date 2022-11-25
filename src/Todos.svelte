@@ -26,12 +26,6 @@
       .orderBy("created", "desc");
   }
   $: todos = collectionData(query, "id").pipe(startWith([]));
-  // let query = db
-  // .collection("todos")
-  // .where("uid", "==", uid)
-  // .orderBy("created", "desc");
-
-  // let todos = collectionData(query, "id").pipe(startWith([]));
 
   async function getDocName(datetime) {
     const nameQuery = db
@@ -42,24 +36,6 @@
     let querySnapshot = await nameQuery.get();
     return querySnapshot.docs[0].id;
   }
-
-  // function add() {
-  //   // Open Create Task Modal
-  //   db.collection("todos").add({
-  //     uid,
-  //     plate,
-  //     km,
-  //     model,
-  //     color,
-  //     description,
-  //     complete: false,
-  //     created: Date.now(),
-  //   });
-  //   description = "";
-  //   plate = "";
-  //   km = "";
-  //   model = "";
-  // }
 
   async function updateStatus(event) {
     const { newStatus, created } = event.detail;
@@ -74,14 +50,9 @@
   }
 </script>
 
-<!--
-Filtros para la tabla
-https://svelte.dev/repl/0429bd69748e44cdaeb8074c982f967d?version=3.41.0 
--->
-
 <ul>
   <div style="float: right;">
-    <input type="search" bind:value={search} placeholder="Search" />
+    <input type="search" class="input" bind:value={search} placeholder="Search" />
   </div>
   <table>
     <tr>
@@ -101,3 +72,10 @@ https://svelte.dev/repl/0429bd69748e44cdaeb8074c982f967d?version=3.41.0
 <hr />
 
 <Modal><Content modalType="add" {uid} /></Modal>
+
+
+<style>
+  th{
+    color: whitesmoke;
+  }
+</style>

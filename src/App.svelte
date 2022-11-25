@@ -4,10 +4,10 @@
 </script>
 
 <svelte:head>
-  <link
+  <!-- <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
-  />
+  /> -->
 </svelte:head>
 
 <main class="content">
@@ -21,12 +21,12 @@
 <style>
   main {
     margin: 20px;
-    /* background-color: rgb(42, 52, 82); */
+    border-color: #3700b3 !important;
   }
   div{
     display: flex;
   }
   h1{
-    /* color: #ccc !important; */
+    color: #ccc !important;
   }
 </style>

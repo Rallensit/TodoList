@@ -36,9 +36,12 @@
 
 <style>
   section {
-    background: rgb(235, 235, 235);
-    /* background-color: rgb(125, 158, 255); */
-    /* color: white; */
+    background: #232323;
+    color: whitesmoke;
     padding: 20px;
+  }
+  .button {
+    background-color: #e7e7e7;
+    color: black;
   }
 </style>
