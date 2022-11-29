@@ -36,7 +36,8 @@
   }
   span {
     color: #450fc2;
-    font-family: "Rubik Glitch", Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: "Rubik Glitch", Impact, Haettenschweiler, "Arial Narrow Bold",
+      sans-serif;
     font-size: 68px;
     user-select: none;
   }
