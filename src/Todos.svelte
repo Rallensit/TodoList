@@ -17,66 +17,86 @@
 
   let thereIsNextButton = true;
   let thereIsPreviousButton = false;
+  let nextquery;
 
   let lastVisible;
   let firstVisible;
 
   let firstData;
-  let lastData;
+
+  let page = 0;
+  let pagination = 5;
 
   (async () => {
-    const nameQuery = db
-      .collection("todos")
-      .where("uid", "==", uid)
-      .orderBy("created", "desc");
-    let querySnapshot = await nameQuery.get();
+    baseQuery();
+    let querySnapshot = await query.get();
     firstData = querySnapshot.docs[0].id;
-    lastData = querySnapshot.docs[querySnapshot.docs.length - 1].id;
   })();
 
-  // arreglar filtro para que funcione con paginacion
+  // Arreglar filtro para que funcione con paginacion
+  // Meter todos query en una funcion que sea llamada desde el if, separando con search y sin search
+  async function baseQuery(){
+    query = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .orderBy("created", "desc")
+      .limit(5);
+    todos = collectionData(query, "id").pipe(startWith([]));
+    await query.get().then(function (documentSnapshots) {
+      lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    });
+  }
 
-  // $: if (search) {
-  //   query = db
-  //     .collection("todos")
-  //     .where("uid", "==", uid)
-  //     .where("plate", "==", search)
-  //     .orderBy("created", "desc")
-  //     .limit(5);
-  //   todos = collectionData(query, "id").pipe(startWith([]));
-  //   query.get().then(function (documentSnapshots) {
-  //     lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-  //   });
-  // } else {
-  //   query = db
-  //     .collection("todos")
-  //     .where("uid", "==", uid)
-  //     .orderBy("created", "desc")
-  //     .limit(5);
-  //   todos = collectionData(query, "id").pipe(startWith([]));
-  //   query.get().then(function (documentSnapshots) {
-  //     lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-  //   });
-  // }
+  function filteredQuery(search) {
+    query = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .where("plate", "==", search)
+      .orderBy("created", "desc")
+      .limit(5);
+    todos = collectionData(query, "id").pipe(startWith([]));
+    query.get().then(function (documentSnapshots) {
+      lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    });
+  }
 
-  query = db
-    .collection("todos")
-    .where("uid", "==", uid)
-    .orderBy("created", "desc")
-    .limit(5);
-  todos = collectionData(query, "id").pipe(startWith([]));
-  query.get().then(function (documentSnapshots) {
-    lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
-    firstVisible = documentSnapshots.docs[0];
-  });
+  $: if (search) {
+    filteredQuery(search);
+  } else {
+    baseQuery();
+  }
 
+  // query = db
+  //   .collection("todos")
+  //   .where("uid", "==", uid)
+  //   .orderBy("created", "desc")
+  //   .limit(5);
+  // todos = collectionData(query, "id").pipe(startWith([]));
+  // query.get().then(function (documentSnapshots) {
+  //   lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+  //   firstVisible = documentSnapshots.docs[0];
+  // });
+
+
+  // Revisar esto de abajo
   async function thereIsNext() {
-    let nextquery = db
+    if (search) {
+      nextquery = db
+      .collection("todos")
+      .where("uid", "==", uid)
+      .where("plate", "==", search)
+      .orderBy("created", "desc")
+      .startAfter(lastVisible)
+      .limit(1);
+    } else {
+      nextquery = db
       .collection("todos")
       .where("uid", "==", uid)
       .orderBy("created", "desc")
       .startAfter(lastVisible)
       .limit(1);
+    }
+    
 
     await nextquery.get().then(function (documentSnapshots) {
       if (documentSnapshots.docs.length != 0) {
@@ -155,6 +175,7 @@
     db.collection("todos").doc(id).delete();
   }
 </script>
+
 <ul>
   <div>
     <Modal>
