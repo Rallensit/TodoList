@@ -27,7 +27,7 @@
     color = data.color;
   }
 
-  // get the id of the selected document
+  // Get the id of the selected document
   async function getDocName(datetime) {
     const nameQuery = db
       .collection("todos")

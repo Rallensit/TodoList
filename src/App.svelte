@@ -10,16 +10,11 @@
     href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Rubik+Glitch&display=swap"
     rel="stylesheet"
   />
-  <!-- <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
-  /> -->
 </svelte:head>
 
 <main class="content">
   <div>
     <span>TC</span>
-    <!-- <img src="images/favicon_1_15.png" alt="MainImage" /> -->
     <h1>{name}</h1>
   </div>
   <Login />

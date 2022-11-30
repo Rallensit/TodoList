@@ -27,7 +27,6 @@
   export let color = "#000000";
   export let updated = "";
 
-  // console.log(uid);
 
   function add() {
     // Open Create Task Modal
@@ -105,7 +104,6 @@
       <button class="button" on:click={() => (submitted = true)}>
         Add Task
       </button>
-      <!-- on:click={add} -->
     </div>
   </form>
 </div>

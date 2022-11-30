@@ -82,8 +82,6 @@
     {:else}
       <button class="is-button" on:click={toggleStatus}> ❌ </button>
     {/if}
-    <!-- <button class="is-button" on:click={edit}> ✏️ </button> -->
-    <!-- <button class="is-button" on:click={remove}> 🗑️ </button> -->
     <Modal><Content modalType="edit-delete" {created} {uid} /></Modal>
   </td>
 </tr>

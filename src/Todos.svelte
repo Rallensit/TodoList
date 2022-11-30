@@ -70,9 +70,6 @@
     firstVisible = documentSnapshots.docs[0];
   });
 
-  // cojer los datos del query de next()
-  // $: todos = collectionData(query, "id").pipe(startWith([]));
-
   async function thereIsNext() {
     let nextquery = db
       .collection("todos")
@@ -92,8 +89,6 @@
 
   async function thereIsPrevious(query) {
     await query.get().then(function (documentSnapshots) {
-      // console.log(documentSnapshots.docs[0].id);
-      // console.log(firstData);
       if (documentSnapshots.docs[0].id != firstData) {
         thereIsPreviousButton = true;
       } else {
@@ -160,10 +155,8 @@
     db.collection("todos").doc(id).delete();
   }
 </script>
-
 <ul>
   <div>
-    <!-- Editar estilos de la modal -->
     <Modal>
       <Content modalType="add" {uid} />
     </Modal>
@@ -212,7 +205,6 @@
   <button class="button" id="nextButton" disabled on:click={next}>Next</button>
 {/if}
 
-<!-- TODO: Cuando se añade un registro se pierde el evento de abrir otra modal -->
 <style>
   th {
     color: whitesmoke !important;

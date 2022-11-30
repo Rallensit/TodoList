@@ -11,7 +11,6 @@
   <h3>Welcome {displayName}!</h3>
 </div>
 
-<!-- <p>Your userID is { uid }</p> -->
 <style>
   h3 {
     color: #ccc;
