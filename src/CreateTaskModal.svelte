@@ -88,10 +88,11 @@
     </div>
     <div class="formDiv">
       <h4 class="formText">Description</h4>
-      <input
+      <textarea
         class="formInput"
         placeholder="Descripcion tarea"
         bind:value={description}
+        rows="5"
         required
       />
     </div>
@@ -101,7 +102,9 @@
     </div>
     <hr />
     <div class="formDiv">
-      <button class="button" on:click={() => (submitted = true)}> Add Task </button>
+      <button class="button" on:click={() => (submitted = true)}>
+        Add Task
+      </button>
       <!-- on:click={add} -->
     </div>
   </form>

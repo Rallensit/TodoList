@@ -9482,7 +9482,7 @@ textarea {
   border-radius: 2px;
 }
 
-input{
+input, textarea{
   background-color: #232323;
   color: white;
 }
