@@ -158,7 +158,10 @@
 
 <ul>
   <div>
-    <Modal><Content modalType="add" {uid} /></Modal>
+    <!-- Editar estilos de la modal -->
+    <Modal>
+      <Content modalType="add" {uid} />
+    </Modal>
 
     <input
       type="search"

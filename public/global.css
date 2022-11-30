@@ -19,6 +19,13 @@
     transform: rotate(359deg);
   }
 }
+
+.content{
+  background-color: #121212;
+  border: 1px solid #4404d9;
+  border-radius: 5px;
+}
+
 .breadcrumb,
 .button,
 .delete,
@@ -2577,7 +2584,7 @@ fieldset[disabled] .button {
 .content h4,
 .content h5,
 .content h6 {
-  color: #363636;
+  color: #ccc;
   font-weight: 600;
   line-height: 1.125;
 }
@@ -9475,6 +9482,15 @@ textarea {
   border-radius: 2px;
 }
 
+input{
+  background-color: #232323;
+  color: white;
+}
+
+input ::placeholder{
+  color: #ccc;
+}
+
 input:disabled {
   color: #ccc;
 }
@@ -9495,4 +9511,16 @@ button:not(:disabled):active {
 
 button:focus {
   border-color: #666;
+}
+
+.close{
+  background-color: #232323 !important;
+  box-shadow: 0 0 0 1px #4404d9 !important;
+}
+
+.close > ::before{
+  color: #4404d9 !important;
+}
+.close > ::after{
+  color: #ccc !important;
 }

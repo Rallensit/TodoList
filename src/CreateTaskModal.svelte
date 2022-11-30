@@ -3,6 +3,7 @@
   import { db } from "./firebase";
 
   import { fly, fade } from "svelte/transition";
+  export let close;
   let hasError = false;
   let isSuccessVisible = false;
   let submitted = false;
@@ -15,9 +16,8 @@
       isSuccessVisible = false;
     }, 4000);
     await add();
+    close();
   }
-
-  export let close;
 
   export let uid;
   export let description = "";
@@ -29,7 +29,7 @@
 
   // console.log(uid);
 
-  async function add() {
+  function add() {
     // Open Create Task Modal
     db.collection("todos").add({
       uid,
@@ -42,9 +42,6 @@
       created: Date.now(),
       updated,
     });
-
-    // Close Modal
-    close();
   }
 </script>
 
@@ -54,12 +51,13 @@
   <p class="error-alert">{errMessage}</p>
 {:else if isSuccessVisible}
   <p class="error-alert" transition:fade={{ duration: 150 }}>
-    Data updated successfully
+    Data added succesfully
   </p>
 {/if}
 
 <div>
   <h3>Add new task</h3>
+  <hr />
   <form id="taskForm" class:submitted on:submit|preventDefault={handleSubmit}>
     <div class="formDiv">
       <h4 class="formText">Plate</h4>
@@ -103,7 +101,7 @@
     </div>
     <hr />
     <div class="formDiv">
-      <button on:click={() => (submitted = true)}> Add Task </button>
+      <button class="button" on:click={() => (submitted = true)}> Add Task </button>
       <!-- on:click={add} -->
     </div>
   </form>

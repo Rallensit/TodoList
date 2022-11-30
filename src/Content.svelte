@@ -1,5 +1,4 @@
 <script>
-  import { db } from "./firebase.js";
   export let modalType;
   export let uid;
   export let created;
@@ -9,11 +8,10 @@
   const { open, close } = getContext("simple-modal");
 
   const showModal = () => {
-    console.log('entra');
+    // Open task modal passing the user id to assing the data to him
     if (modalType === "add") {
       open(CreateTaskModal, { close, uid: uid });
     } else if (modalType === "edit-delete") {
-      // Pass the selected task data
       open(EditDeleteTaskModal, { close, uid: uid, created: created });
     }
   };

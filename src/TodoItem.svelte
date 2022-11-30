@@ -74,8 +74,8 @@
   </td>
   <td style="display: inline-flex;">
     <div
-    class="color-div"
-    style="background-color: {color}; border:1px solid {color};"
+      class="color-div"
+      style="background-color: {color}; border:1px solid {color};"
     />
     {#if complete}
       <button class="is-button" on:click={toggleStatus}> ✔️ </button>

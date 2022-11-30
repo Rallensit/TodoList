@@ -47,7 +47,7 @@
       plate: plate,
       model: model,
       description: description,
-      updated: Date.now()
+      updated: Date.now(),
     });
     close();
   }
@@ -63,6 +63,7 @@
 
 <div>
   <h3>View the task</h3>
+  <hr />
   <div class="formDiv">
     <h4 class="formText">Plate:</h4>
     <input
@@ -97,8 +98,8 @@
   </div>
   <hr />
   <div class="formDiv">
-    <button on:click={updateItem}> Edit </button>
-    <button on:click={removeItem}> Delete </button>
+    <button class="button" on:click={updateItem}> Edit </button>
+    <button class="button" on:click={removeItem}> Delete </button>
   </div>
 </div>
 

@@ -35,6 +35,7 @@
     align-items: center;
   }
   span {
+    margin-left: 15px;
     color: #450fc2;
     font-family: "Rubik Glitch", Impact, Haettenschweiler, "Arial Narrow Bold",
       sans-serif;
