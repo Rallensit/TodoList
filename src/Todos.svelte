@@ -7,7 +7,7 @@
   import Content from "./Content.svelte";
   import Modal from "svelte-simple-modal";
   import { element } from "svelte/internal";
-  import { endBefore, startAfter } from "firebase/firestore";
+  import { endBefore, snapshotEqual, startAfter } from "firebase/firestore";
 
   export let uid;
 
@@ -33,6 +33,8 @@
     firstData = querySnapshot.docs[0].id;
     lastData = querySnapshot.docs[querySnapshot.docs.length - 1].id;
   })();
+
+  // arreglar filtro para que funcione con paginacion
 
   // $: if (search) {
   //   query = db
@@ -65,6 +67,7 @@
   todos = collectionData(query, "id").pipe(startWith([]));
   query.get().then(function (documentSnapshots) {
     lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    firstVisible = documentSnapshots.docs[0];
   });
 
   // cojer los datos del query de next()
@@ -89,8 +92,8 @@
 
   async function thereIsPrevious(query) {
     await query.get().then(function (documentSnapshots) {
-      console.log(documentSnapshots.docs[0].id);
-      console.log(firstData);
+      // console.log(documentSnapshots.docs[0].id);
+      // console.log(firstData);
       if (documentSnapshots.docs[0].id != firstData) {
         thereIsPreviousButton = true;
       } else {
@@ -118,12 +121,14 @@
   }
 
   async function previous() {
+    let snapshot = await query.get();
+    let last = snapshot.docs[0];
     query = db
       .collection("todos")
       .where("uid", "==", uid)
       .orderBy("created", "desc")
-      .endBefore(firstVisible)
-      .limit(5);
+      .endBefore(last)
+      .limitToLast(5);
     todos = collectionData(query, "id").pipe(startWith([]));
     await query.get().then(function (documentSnapshots) {
       lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
