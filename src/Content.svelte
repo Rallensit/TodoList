@@ -9,6 +9,7 @@
   const { open, close } = getContext("simple-modal");
 
   const showModal = () => {
+    console.log('entra');
     if (modalType === "add") {
       open(CreateTaskModal, { close, uid: uid });
     } else if (modalType === "edit-delete") {

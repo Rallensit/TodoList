@@ -6,10 +6,6 @@
 
   const dispatch = createEventDispatcher();
 
-  function remove() {
-    dispatch("remove", { created });
-  }
-
   function toggleStatus() {
     let newStatus = !complete;
     dispatch("toggle", {
@@ -60,7 +56,7 @@
   }
 </script>
 
-<tr in:fly={{ x: 900, duration: 500 }} out:fade>
+<tr in:fly={{ x: 900, duration: 500 }} out:fade id={created}>
   <td>
     {textFormat(model)}
   </td>

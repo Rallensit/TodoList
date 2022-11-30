@@ -1,5 +1,5 @@
 <script>
-  import { Modal } from "svelte-simple-modal";
+  // import { Modal } from "svelte-simple-modal";
   import { db } from "./firebase";
 
   import { fly, fade } from "svelte/transition";
@@ -9,12 +9,12 @@
 
   const errMessage = "All the fields are required";
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     isSuccessVisible = true;
     setTimeout(function () {
       isSuccessVisible = false;
     }, 4000);
-    add();
+    await add();
   }
 
   export let close;
@@ -29,7 +29,7 @@
 
   // console.log(uid);
 
-  function add() {
+  async function add() {
     // Open Create Task Modal
     db.collection("todos").add({
       uid,
