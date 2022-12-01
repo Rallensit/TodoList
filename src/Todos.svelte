@@ -27,16 +27,15 @@
   // first data of the query of all documents
   let firstData;
 
+  // First and last document in the query
+  let lastVisible;
+  let firstVisible;
+
   // Number of documents
   let docNum;
 
   let thereIsNextButton = true;
   let thereIsPreviousButton = false;
-
-  let lastVisible;
-  let firstVisible;
-
-  let page = 0;
 
   (async () => {
     await baseQuery();
@@ -203,7 +202,7 @@
           <th>Km</th>
           <th>Description</th>
           <th>Date</th>
-          <th />
+          <th>Options</th>
         </tr>
       </thead>
       <tbody id="tbody">
@@ -234,6 +233,7 @@
 {/if}
 
 <style>
+  
   .tableFixHead {
     overflow-y: auto; /* Hide vertical scrollbar */
     overflow-x: hidden; /* Hide horizontal scrollbar */
@@ -263,19 +263,19 @@
     width: 7px;
   }
   /* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #6d2eff; 
-  border-radius: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #4404d9; 
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #6d2eff;
+    border-radius: 10px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #3b01c1; 
-}
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4404d9;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3b01c1;
+  }
 </style>
