@@ -11,40 +11,55 @@
 
   export let uid;
 
+  // number of rows per page
+  let pagination = 5;
+
+  // Search variable
   let search = "";
+
+  // Query
   let query;
+  let nextquery;
+
+  // Result of query ready to show
   let todos;
+
+  // first data of the query of all documents
+  let firstData;
+
+  // Number of documents
+  let docNum;
 
   let thereIsNextButton = true;
   let thereIsPreviousButton = false;
-  let nextquery;
 
   let lastVisible;
   let firstVisible;
 
-  let firstData;
-
   let page = 0;
-  let pagination = 5;
 
   (async () => {
-    baseQuery();
+    await baseQuery();
     let querySnapshot = await query.get();
     firstData = querySnapshot.docs[0].id;
   })();
 
   // Arreglar filtro para que funcione con paginacion
   // Meter todos query en una funcion que sea llamada desde el if, separando con search y sin search
-  async function baseQuery(){
+
+  async function baseQuery() {
     query = db
       .collection("todos")
       .where("uid", "==", uid)
       .orderBy("created", "desc")
-      .limit(5);
+      .limit(pagination);
     todos = collectionData(query, "id").pipe(startWith([]));
     await query.get().then(function (documentSnapshots) {
       lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      // docNum = documentSnapshots.docs.length;
     });
+    thereIsNext();
+    thereIsPrevious(query);
   }
 
   function filteredQuery(search) {
@@ -52,12 +67,13 @@
       .collection("todos")
       .where("uid", "==", uid)
       .where("plate", "==", search)
-      .orderBy("created", "desc")
-      .limit(5);
+      .orderBy("created", "desc");
     todos = collectionData(query, "id").pipe(startWith([]));
     query.get().then(function (documentSnapshots) {
       lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
     });
+    thereIsNextButton = false;
+    thereIsPreviousButton = false;
   }
 
   $: if (search) {
@@ -70,33 +86,21 @@
   //   .collection("todos")
   //   .where("uid", "==", uid)
   //   .orderBy("created", "desc")
-  //   .limit(5);
+  //   .limit(pagination);
   // todos = collectionData(query, "id").pipe(startWith([]));
   // query.get().then(function (documentSnapshots) {
   //   lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
   //   firstVisible = documentSnapshots.docs[0];
   // });
 
-
-  // Revisar esto de abajo
+  // Comprueba si hay mas registros
   async function thereIsNext() {
-    if (search) {
-      nextquery = db
-      .collection("todos")
-      .where("uid", "==", uid)
-      .where("plate", "==", search)
-      .orderBy("created", "desc")
-      .startAfter(lastVisible)
-      .limit(1);
-    } else {
-      nextquery = db
+    nextquery = db
       .collection("todos")
       .where("uid", "==", uid)
       .orderBy("created", "desc")
       .startAfter(lastVisible)
       .limit(1);
-    }
-    
 
     await nextquery.get().then(function (documentSnapshots) {
       if (documentSnapshots.docs.length != 0) {
@@ -107,6 +111,7 @@
     });
   }
 
+  // Comprueba si hay mas datos antes
   async function thereIsPrevious(query) {
     await query.get().then(function (documentSnapshots) {
       if (documentSnapshots.docs[0].id != firstData) {
@@ -123,7 +128,7 @@
       .where("uid", "==", uid)
       .orderBy("created", "desc")
       .startAfter(lastVisible)
-      .limit(5);
+      .limit(pagination);
     todos = collectionData(query, "id").pipe(startWith([]));
 
     await query.get().then(function (documentSnapshots) {
@@ -143,7 +148,7 @@
       .where("uid", "==", uid)
       .orderBy("created", "desc")
       .endBefore(last)
-      .limitToLast(5);
+      .limitToLast(pagination);
     todos = collectionData(query, "id").pipe(startWith([]));
     await query.get().then(function (documentSnapshots) {
       lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
@@ -189,23 +194,25 @@
       placeholder="Search for plate"
     />
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Model</th>
-        <th>Plate Number</th>
-        <th>Km</th>
-        <th>Description</th>
-        <th>Date</th>
-        <th />
-      </tr>
-    </thead>
-    <tbody id="tbody">
-      {#each $todos as todo}
-        <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
-      {/each}
-    </tbody>
-  </table>
+  <div class="tableFixHead">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Plate Number</th>
+          <th>Km</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th />
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        {#each $todos as todo}
+          <TodoItem {...todo} on:remove={removeItem} on:toggle={updateStatus} />
+        {/each}
+      </tbody>
+    </table>
+  </div>
 </ul>
 
 <hr />
@@ -227,6 +234,18 @@
 {/if}
 
 <style>
+  .tableFixHead {
+    overflow-y: auto; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    height: 370px;
+  }
+  .tableFixHead thead th {
+    position: sticky;
+    background-color: #232323;
+    top: 0;
+    z-index: 100;
+  }
+
   th {
     color: whitesmoke !important;
   }
@@ -238,4 +257,25 @@
     margin-left: 25px;
     max-width: 250px;
   }
+
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  /* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #6d2eff; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4404d9; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b01c1; 
+}
 </style>
