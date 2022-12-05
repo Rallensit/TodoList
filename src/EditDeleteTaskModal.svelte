@@ -71,9 +71,6 @@
       placeholder="Min 4 characters and max 12"
       bind:value={plate}
       required
-      minlength="4"
-      maxlength="12"
-      pattern="[0-9A-Z-]"
     />
   </div>
   <div class="formDiv">
@@ -83,9 +80,6 @@
       placeholder="From 0 to 999999999999"
       bind:value={km}
       required
-      minlength="1"
-      maxlength="12"
-      pattern="[0-9]"
     />
   </div>
   <div class="formDiv">
@@ -95,8 +89,6 @@
       placeholder="Max 30 characters"
       bind:value={model}
       required
-      maxlength="30"
-      pattern="[a-zA-Z0-9.-]"
     />
   </div>
   <div class="formDiv">
@@ -107,8 +99,6 @@
       bind:value={description}
       rows="5"
       required
-      maxlength="50"
-      pattern="[a-zA-Z0-9.-]"
     />
   </div>
   <div class="formDiv">
