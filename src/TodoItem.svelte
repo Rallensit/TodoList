@@ -66,7 +66,7 @@
   <td class="hidden">
     {km}
   </td>
-  <td>
+  <td class="hidden-small">
     {textFormat(description)}
   </td>
   <td>
@@ -78,9 +78,9 @@
       style="background-color: {color}; border:1px solid {color};"
     />
     {#if complete}
-      <button class="is-button" on:click={toggleStatus}> ✔️ </button>
+      <button class="is-button hidden-small" on:click={toggleStatus}> ✔️ </button>
     {:else}
-      <button class="is-button" on:click={toggleStatus}> ❌ </button>
+      <button class="is-button hidden-small" on:click={toggleStatus}> ❌ </button>
     {/if}
     <Modal><Content modalType="edit-delete" {created} {uid} /></Modal>
   </td>

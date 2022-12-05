@@ -9534,3 +9534,8 @@ button:focus {
     display: none !important;
   }
 }
+@media (max-width:500px) {
+  .hidden-small{
+    display: none;
+  }
+}
