@@ -234,17 +234,17 @@
 
 <style>
   
-  .tableFixHead {
-    overflow-y: auto; /* Hide vertical scrollbar */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
+  /* .tableFixHead {
+    overflow-y: auto;
+    overflow-x: hidden;
     height: 370px;
-  }
-  .tableFixHead thead th {
+  } */
+  /* .tableFixHead thead th {
     position: sticky;
     background-color: #232323;
     top: 0;
     z-index: 100;
-  }
+  } */
 
   th {
     color: whitesmoke !important;
