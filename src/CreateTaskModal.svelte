@@ -27,7 +27,6 @@
   export let color = "#000000";
   export let updated = "";
 
-
   function add() {
     // Open Create Task Modal
     db.collection("todos").add({
@@ -62,37 +61,47 @@
       <h4 class="formText">Plate</h4>
       <input
         class="formInput"
-        placeholder="0000AAA o AA0000AA"
+        placeholder="Min 4 characters and max 12"
         bind:value={plate}
         required
+        minlength="4"
+        maxlength="12"
+        pattern="[0-9A-Z-]"
       />
     </div>
     <div class="formDiv">
       <h4 class="formText">KM</h4>
       <input
         class="formInput"
-        placeholder="p.ej 150000"
+        placeholder="From 0 to 999999999999"
         bind:value={km}
         required
+        minlength="1"
+        maxlength="12"
+        pattern="[0-9]"
       />
     </div>
     <div class="formDiv">
       <h4 class="formText">Model</h4>
       <input
         class="formInput"
-        placeholder="p.ej Seat Ibiza 1.9tdi"
+        placeholder="Max 30 characters"
         bind:value={model}
         required
+        maxlength="30"
+        pattern="[a-zA-Z0-9.-]"
       />
     </div>
     <div class="formDiv">
       <h4 class="formText">Description</h4>
       <textarea
         class="formInput"
-        placeholder="Descripcion tarea"
+        placeholder="Max 30 characters"
         bind:value={description}
         rows="5"
         required
+        maxlength="50"
+        pattern="[a-zA-Z0-9.-]"
       />
     </div>
     <div class="formDiv">

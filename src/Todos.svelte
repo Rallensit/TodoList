@@ -197,9 +197,9 @@
     <table>
       <thead>
         <tr>
-          <th>Model</th>
-          <th>Plate Number</th>
-          <th>Km</th>
+          <th class="hidden">Model</th>
+          <th>Plate</th>
+          <th class="hidden">Km</th>
           <th>Description</th>
           <th>Date</th>
           <th>Options</th>

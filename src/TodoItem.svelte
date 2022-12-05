@@ -57,13 +57,13 @@
 </script>
 
 <tr in:fly={{ x: 900, duration: 500 }} out:fade id={created}>
-  <td>
+  <td class="hidden">
     {textFormat(model)}
   </td>
   <td>
     {plate}
   </td>
-  <td>
+  <td class="hidden">
     {km}
   </td>
   <td>

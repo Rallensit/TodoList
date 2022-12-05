@@ -9525,3 +9525,12 @@ button:focus {
 .close > ::after{
   color: #ccc !important;
 }
+
+@media (max-width:780px) {
+  .hidden{
+    display: none;
+  }
+  .color-div{
+    display: none !important;
+  }
+}
