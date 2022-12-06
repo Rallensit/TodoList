@@ -34,7 +34,7 @@
   // Number of documents
   let docNum;
 
-  let thereIsNextButton = true;
+  let thereIsNextButton = false;
   let thereIsPreviousButton = false;
 
   (async () => {
