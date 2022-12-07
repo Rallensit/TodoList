@@ -25,7 +25,6 @@
   export let plate = "";
   export let km = "";
   export let model = "";
-  export let color = "#000000";
   export let updated = "";
 
   function add() {
@@ -35,7 +34,6 @@
       plate,
       km,
       model,
-      color,
       description,
       complete: false,
       created: Date.now(),
@@ -94,10 +92,6 @@
         rows="5"
         required
       />
-    </div>
-    <div class="formDiv">
-      <h4 class="formText">Color</h4>
-      <input class="formInput" type="color" bind:value={color} />
     </div>
     <hr />
     <div class="formDiv">

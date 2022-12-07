@@ -21,7 +21,6 @@
   export let plate;
   export let km;
   export let model;
-  export let color;
 
   function dateFormat(dateTime, format) {
     // Parse the input
@@ -73,10 +72,6 @@
     {dateFormat(created, "dd-mm-yyyy")}
   </td>
   <td style="display: inline-flex;">
-    <div
-      class="color-div"
-      style="background-color: {color}; border:1px solid {color};"
-    />
     {#if complete}
       <button class="is-button hidden-small" on:click={toggleStatus}> ✔️ </button>
     {:else}
@@ -86,11 +81,3 @@
   </td>
 </tr>
 
-<style>
-  .color-div {
-    display: block;
-    content: "";
-    width: 40px;
-    height: 40px;
-  }
-</style>
