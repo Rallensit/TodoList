@@ -9,7 +9,6 @@
   export let plate;
   export let km;
   export let model;
-  export let color;
 
   // Load data from selected item
   async function getDocData(datetime) {
@@ -24,7 +23,6 @@
     plate = data.plate;
     km = data.km;
     model = data.model;
-    color = data.color;
   }
 
   // Get the id of the selected document
@@ -42,7 +40,6 @@
   async function updateItem() {
     const id = await getDocName(created);
     db.collection("todos").doc(id).update({
-      color: color,
       km: km,
       plate: plate,
       model: model,
@@ -100,10 +97,6 @@
       rows="5"
       required
     />
-  </div>
-  <div class="formDiv">
-    <h4 class="formText">Color:</h4>
-    <input class="formInput" type="color" bind:value={color} />
   </div>
   <hr />
   <div class="formDiv">
