@@ -50,7 +50,7 @@
 
   function textFormat(txt) {
     if (txt.length > 10) {
-      txt = txt.substring(0, 10) + "...";
+      txt = txt.substring(0, 20) + "...";
     }
     return txt;
   }
