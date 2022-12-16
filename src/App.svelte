@@ -4,6 +4,11 @@
 </script>
 
 <svelte:head>
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4475432862329216"
+    crossorigin="anonymous"
+  ></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link

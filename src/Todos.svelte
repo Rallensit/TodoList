@@ -31,9 +31,6 @@
   let lastVisible;
   let firstVisible;
 
-  // Number of documents
-  let docNum;
-
   let thereIsNextButton = false;
   let thereIsPreviousButton = false;
 
